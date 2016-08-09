@@ -1,0 +1,15 @@
+if [ -f "$HOME/.profile" ]; then
+    . "$HOME/.profile"
+fi
+
+export EDITOR=mcedit
+export HISTCONTROL=ignorespace:ignoredups
+
+{% if mode == "prod" %}
+USERHOST_COLOR=`tput setaf 1` # red
+{% else %}
+USERHOST_COLOR=`tput setaf 3` # yellow
+{% endif %}
+WDIR_COLOR=`tput setaf 6`     # cyan
+DEFAULT_COLOR=`tput setaf 7`  # gray
+export PS1="$USERHOST_COLOR\u@\h $WDIR_COLOR\W $DEFAULT_COLOR\$ "
