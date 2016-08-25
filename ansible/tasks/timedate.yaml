@@ -1,0 +1,17 @@
+---
+
+- name: Inquire for current date and time settings
+  command: timedatectl status
+  register: timedate_status
+  changed_when: false
+
+- block:
+
+  - name: Set timezone to {{ timezone }}
+    command: datetimectl set-timezone {{ timezone }}
+    when: timezone not in timedate_status.stdout
+
+  - name: Install NTP
+    apt: name=ntp state=latest
+
+  become: yes

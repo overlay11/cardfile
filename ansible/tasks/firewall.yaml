@@ -1,0 +1,16 @@
+---
+
+- block:
+
+  - name: Install UFW
+    apt: name=ufw state=latest
+
+  - name: Enable UFW and set the default policy
+    ufw: state=enabled policy=reject
+
+  - name: Allow SSH access
+    ufw: rule=allow port=22 proto=tcp
+
+  when: mode == "prod"
+  become: yes
+

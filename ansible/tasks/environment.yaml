@@ -1,0 +1,8 @@
+---
+
+- name: Install Midnight Commander
+  apt: name=mc state=latest
+  become: yes
+
+- name: Configure login shell
+  template: src=bash_profile.j2 dest=~/.bash_profile
