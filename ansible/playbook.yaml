@@ -2,12 +2,15 @@
 
 - hosts: all
 
-  vars_files:
-  - vars.yaml
-
   become_method: sudo
 
   tasks:
+  - include_vars: "{{ item }}"
+    with_first_found:
+    - vars.yaml
+    - default_vars.yaml
   - include: tasks/environment.yaml
   - include: tasks/firewall.yaml
   - include: tasks/timedate.yaml
+  - include: tasks/db.yaml
+  - include: tasks/python.yaml
