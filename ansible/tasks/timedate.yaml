@@ -8,7 +8,7 @@
 - block:
 
   - name: Set timezone to {{ timezone }}
-    command: datetimectl set-timezone {{ timezone }}
+    command: timedatectl set-timezone {{ timezone }}
     when: timezone not in timedate_status.stdout
 
   - name: Install NTP
